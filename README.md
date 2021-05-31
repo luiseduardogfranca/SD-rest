@@ -10,6 +10,8 @@ A API consiste em uma interface de comunicação utilizado os métodos HTTP, que
 - POST -> Para adicionar um item
 - DELETE -> Para remover o item
 
+Enquanto o lado cliente utiliza a biblioteca requests para executar as requisições de acordo com os métodos expostos na API (GET, POST e DELETE).
+
 ### Pré-requisitos
 
 - python3
