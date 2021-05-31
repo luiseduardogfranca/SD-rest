@@ -10,28 +10,29 @@ def get_all_produtos():
 
 @app.route("/produtos", methods=['POST'])
 def create_produto():
+    print(request.json)
     if not request.json or not 'code' in request.json:
         abort(400)
     
     produto = {
-        'code': request.json['code'], 
-        'name': request.json['name'], 
-        'price': request.json['price'], 
-        'quantity': request.json['quantity'], 
+        'code': request.json.get("code", ""), 
+        'name': request.json.get("name", ""), 
+        'price': request.json.get("price", ""), 
+        'quantity': request.json.get("quantity", ""), 
     }
 
     if (market.add_product(produto)):
-        return jsonify({'produto': produto }), 201
+        return jsonify(produto), 201
     else: 
         return jsonify({'response': False})
 
 @app.route("/produtos/<string:codeProduto>", methods=['DELETE'])
 def remove_produto(codeProduto):
     if (not market.remove_product(codeProduto)):
-        return jsonify({"response": False}) 
+        abort(404) 
 
-    return jsonify({"response": True}) 
+    return jsonify({"response": True}), 200 
 
 if __name__ == "__main__":
     print("Servidor em execução!")
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='127.0.0.1', debug=True)
