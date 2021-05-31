@@ -18,5 +18,20 @@ class Market():
 
         return sum(list_quantity)
 
+    def add_product(self, product): 
+        if ("code" in product and "name" in product and "price" in product and "quantity" in product):
+            self.products.append(product)
+            print(self.products)
+            return True
+
+        return False
+
+    def remove_product(self, code): 
+        new_product_arr = list(filter(lambda product: product["code"] != code, self.products))
+        is_removed = True if len(new_product_arr) < len(self.products) else False
+        self.products = new_product_arr
+
+        return is_removed
+
     def get_all(self):
         return self.products

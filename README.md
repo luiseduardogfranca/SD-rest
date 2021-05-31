@@ -50,6 +50,17 @@ Com o projeto em execução, para acessar a API basta executar os seguintes coma
 
   curl -i http://localhost:5000/produtos
 
+- Para adicionar algum produto
+
+  curl -i -X POST http://localhost:5000/produtos/[strinng:codeProduto]
+
+- Para adicionar produto
+  curl -i -H "Content-Type: application/json" -X POST -d '{"code":"223","name": "Sushi", "price": 2.40, "quantity":1}' http://localhost:5000/produtos
+
+- Para remover algum produto pelo código
+
+  curl -i -X DELETE http://localhost:5000/produtos/[strinng:codeProduto]
+
 ### Equipe:
 
 - Luís Eduardo Gomes França
