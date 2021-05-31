@@ -41,7 +41,7 @@ python3 market_controller.py
 
 ```
 
-Caso ainda não tenha instalado o Flask, basta executar o seguinte comando:
+Caso ainda não tenha instalado o **Flask**, basta executar o seguinte comando:
 
 ```bash
 pip3 install flask
@@ -52,6 +52,11 @@ pip3 install flask
 ```bash
 python3 client.py
 
+```
+Caso ainda não tenha instalado a lib **requests**, basta executar o seguinte comando:
+
+```bash
+pip3 install requests
 ```
 
 ### Rotas
