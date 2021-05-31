@@ -1,42 +1,54 @@
-# Trabalho SD - API Rest 
+# Trabalho SD - API Rest
 
-### Descrição 
-##### Uma empresa fornece uma API para gerênciamento de produto
+### Descrição
 
-A filial informa um produto através do seu código e a central deverá responder a quantidade disponível em estoque deste mesmo produto também através do código informado.
+##### Uma empresa fornece uma API para gerênciamento e listagem de produtos
 
-### Pré-requisitos 
-- Java 
+A API consiste em uma interface de comunicação utilizado os métodos HTTP, que são:
+
+- GET -> Para ler um ou mais itens
+- POST -> Para adicionar um item
+- DELETE -> Para remover o item
+
+### Pré-requisitos
+
+- Python3
+- Flask
 
 ### Como executar?
 
-O projeto está dividido em três arquivos, que são: *client.py*, *server.py* e *dao_market.py*. 
+O projeto está dividido em dois arquivos, que são: _market_controller.py_ e _dao_market.py_.
 
-- client.py: contém todas as funcionalidades pra abertura de conexão com o servidor bem como a leitura de dados e tratamento das respostas referente a quantidade de produtos em estoque.
+- market_controller.py: contém a implementação para a leitura das requests vindo do client e o processamento dos dados com a classe de acesso a dados contida no arquivo dao_market.py através dos métodos HTTP citados acima. Esse arquivo vai ser o intermédio entre o cliente e a classe responsável pela manipulação dos dados
 
-- server.py: contém a implementação para a leitura das requests vindo do client e o processamento dos dados com a classe de acesso a dados contida no arquivo dao_market.py
-
-- dao_market.py: contém a gerência dos dados bem como a inicialização do array de dados simulando uma lista de produtos. Essa classe é respnsável por buscar o produto pelo código passado e fazer o cálculo dos valores de cada produto solictado em estoque.
+- dao_market.py: contém a gerência dos dados bem como a inicialização do array de dados simulando uma lista de produtos fazendo a gerêcia dos mesmmos.
 
 Dado a explicação acima de cada arquivo, podemos passar para o passo a passo de execução do projeto.
 
 #### Passos
 
-Considerando que você já esteja dentro do folder do projeto.
+Considerando que você já esteja dentro do folder do projeto e que as depedências já tenham sido instaladas no seu computador.
 
-1. Abra dois terminais, ou duas abas, e em cada terminal execute o seguinte comando: 
+1. Abra o terminal e execute o seguinte comando:
 
 ```bash
-python3 server.py
+python3 market_controller.py
+
 ```
-e em outro terminal:
+
+Caso ainda não tenha instalado o Flask, basta executar o seguinte comando:
+
 ```bash
-python3 client.py
+pip3 install flask
 ```
 
-2. No terminal do client, basta que você envie os dados como bem solicitado. No caso, o código do produto. 
+### Rotas
 
-3. Para finalizar o programa no lado client basta digitar o valor *0*.
+Com o projeto em execução, para acessar a API basta executar os seguintes comandos com os devidos parâmetros no terminal:
+
+- Para ler os produtos:
+
+  curl -i http://localhost:5000/produtos
 
 ### Equipe:
 
