@@ -34,7 +34,13 @@ Dado a explicação acima de cada arquivo, podemos passar para o passo a passo d
 
 Considerando que você já esteja dentro do folder do projeto e que as depedências já tenham sido instaladas no seu computador.
 
-1. Abra um terminal à parte e execute o seguinte comando para deixar a API em execução:
+1. Caso você ainda não possua todas as dependências instaladas, basta executar o seguinte comando:
+
+```bash
+pip3 install -r requirements.txt
+```
+
+2. Abra um terminal à parte e execute o seguinte comando para deixar a API em execução:
 
 ```bash
 python3 market_controller.py
@@ -47,7 +53,7 @@ Caso ainda não tenha instalado o **Flask**, basta executar o seguinte comando:
 pip3 install flask
 ```
 
-2. Abra um outro terminal para executar o lado cliente e assim simular todas as funcionalidades através das requests. Execute o seguinte comando:
+3. Abra um outro terminal para executar o lado cliente e assim simular todas as funcionalidades através das requests. Execute o seguinte comando:
 
 ```bash
 python3 client.py
