@@ -32,6 +32,24 @@ class Client():
             self.print_product(res.json())
             print("\n>>> ===============")
 
+    def update_product(self, code, name, price, quantity):
+        product = {
+            "code": code,
+            "name": name,
+            "price": price,
+            "quantity": quantity
+        }
+        
+        res = requests.put(f"http://{self.HOST}:{self.PORT}/produtos/{code}", json=product)
+        
+        if (res.status_code == 400 or res.status_code == 500):
+            print("\n>>> Erro ao atualizar/cadastrar")
+        
+        elif (res.status_code == 201 and res.json()):
+            print("\n>>> Produto atualizado/criado!\n")
+            self.print_product(res.json())
+            print("\n>>> ===============")
+
     def remove_product(self, code):
         res = requests.delete(f"http://{self.HOST}:{self.PORT}/produtos/{code}")
 
@@ -50,7 +68,7 @@ client = Client()
 print("<<<   Iniciando conexão com a central de produtos  >>>")
 print("Conectando a central da empresa. Para sair digite 0.\n")
 
-msg_code = input("Funções disponíveis: \n\n\t1 - Listar todos os produtos \n\t2 - Cadastrar produto \n\t3 - Remover produto \n\t0 - Encerrar programa \n>>> ")
+msg_code = input("Funções disponíveis: \n\n\t1 - Listar todos os produtos \n\t2 - Cadastrar produto \n\t3 - Remover produto \n\t4 - Atualizar produto \n\t0 - Encerrar programa \n>>> ")
 
 while msg_code != "0":
     if msg_code == "1":
@@ -72,6 +90,16 @@ while msg_code != "0":
         code = input("Código: ")
 
         client.remove_product(code)
+
+    elif msg_code == "4":
+        print(">>> \nForneça os dados do produto\n")
+        
+        code = input("Código: ")
+        name = input("Nome: ")
+        price = input("Preço: ")
+        quantity = input("Quantidade: ")
+
+        client.update_product(code, name, price, quantity)
     
-    msg_code = input("\n\nFunções disponíveis: \n\n\t1 - Listar todos os produtos \n\t2 - Cadastrar produto \n\t3 - Remover produto \n\t0 - Encerrar programa \n>>> ")
+    msg_code = input("Funções disponíveis: \n\n\t1 - Listar todos os produtos \n\t2 - Cadastrar produto \n\t3 - Remover produto \n\t4 - Atualizar produto \n\t0 - Encerrar programa \n>>> ")
 

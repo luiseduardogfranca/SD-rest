@@ -10,7 +10,6 @@ def get_all_produtos():
 
 @app.route("/produtos", methods=['POST'])
 def create_produto():
-    print(request.json)
     if not request.json or not 'code' in request.json:
         abort(400)
     
@@ -22,7 +21,53 @@ def create_produto():
     }
 
     if (market.add_product(produto)):
+        return jsonify(produto), 200
+    else: 
+        return jsonify({'response': False})
+
+@app.route("/produtos/<string:codeProduto>", methods=['PUT'])
+def put_product(codeProduto):
+
+    check_product = list(filter(lambda product: product["code"] == codeProduto, market.get_all()))
+    
+    product = {
+        'code': request.json.get("code", ""), 
+        'name': request.json.get("name", ""), 
+        'price': request.json.get("price", ""), 
+        'quantity': request.json.get("quantity", ""), 
+    }
+
+    if (len(check_product) == 1):
+        market.update_product(product)
+        return jsonify(product), 200
+    
+    elif (len(check_product) == 0):
+        market.add_product(product)
+        return jsonify(product), 201
+    
+    else: 
+        return jsonify({'response': False})
+
+@app.route("/produtos/<string:codeProduto>", methods=['PATCH'])
+def patch_product(codeProduto):
+
+    check_product = list(filter(lambda product: product["code"] == codeProduto, market.get_all()))
+    
+    product = {
+        'code': request.json.get("code", ""), 
+        'name': request.json.get("name", ""), 
+        'price': request.json.get("price", ""), 
+        'quantity': request.json.get("quantity", ""), 
+    }
+
+    if (len(check_product) == 1):
+        market.update_product(product)
+        return jsonify(produto), 200
+    
+    elif (len(check_product) == 0):
+        market.add_product(product)
         return jsonify(produto), 201
+    
     else: 
         return jsonify({'response': False})
 
