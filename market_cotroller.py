@@ -6,7 +6,11 @@ market = Market()
 
 @app.route("/produtos", methods=['GET'])
 def get_all_produtos():
-    return jsonify(market.get_all())
+    resp = jsonify(market.get_all())
+    resp.headers.set('Access-Control-Allow-Origin', '*')
+    resp.headers.set('Authorization:', 'Basic YWxhZGRpbjpvcGVuc2VzYW1l')
+    
+    return resp
 
 @app.route("/produtos", methods=['POST'])
 def create_produto():
@@ -21,7 +25,10 @@ def create_produto():
     }
 
     if (market.add_product(produto)):
-        return jsonify(produto), 200
+        resp = jsonify(produto)
+        resp.headers.set('Access-Control-Allow-Origin', '*')
+        resp.headers.set('Authorization:', 'Basic YWxhZGRpbjpvcGVuc2VzYW1l')
+        return resp, 200
     else: 
         return jsonify({'response': False})
 
